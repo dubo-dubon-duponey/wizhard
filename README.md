@@ -90,4 +90,12 @@ Not that any of these funny iot devices are secure in any way of course, but the
  * Something funky goes on when the bulb has previously been set in one of the weird pulsating modes - in case setPilot methods fail bizarelly, consider
  a quick `echo '{"method":"getPilot","id":527,"env":"pro","params":{"mac":"0x:de:ad:be:ee:ef","rssi":-75,"cnx":"0501","src":"udp","state":true,"sceneId":0,"r":0,"g":255,"b":4,"c":0,"w":0,"dimming":100}}' | nc -u $BULBIP 38899`
  to reset it
+
+Oh, and btw.
+You should really prevent these bulbs from accessing internet... :)
  
+## Prior art
+
+ * https://github.com/sbidy/pywizlight
+ * https://community.home-assistant.io/t/ability-to-control-philips-wiz-connected-wifi-smart-led-lights/145953/5
+ * https://blog.dammitly.net/2019/10/cheap-hackable-wifi-light-bulbs-or-iot.html
