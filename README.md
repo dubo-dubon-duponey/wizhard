@@ -70,7 +70,7 @@ make build
 
 ## Persistence
 
-Granted you do not destroyed the data volume (or otherwise store /data in a persistent location),
+Granted you do not destroy the data volume (or otherwise store /data in a persistent location),
 you can just bounce the container adding/removing ips for additional bulbs and you should
 not need to reconfigure HomeKit.
 
