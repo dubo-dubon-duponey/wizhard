@@ -20,29 +20,21 @@ and let you enjoy the bliss of using HomeKit with them.
 
 ## TL;DR
 
-```
-make build
-./dist/wizhard --help
-./dist/wizhard register --name "Fancy fancy" --pin 87654312 --ips 1.2.3.4 --ips 5.6.7.8
-```
-
-<!--
-Run the docker image, feeding it the ip addresses of your Wiz bulbs.
+Run the docker image, feeding it the ip addresses of your Wiz bulbs (space separated).
 
 ```
 docker run -d \
-    --env HomeKit_NAME="My Fancy" \
-    --env HomeKit_PIN="87654312" \
-    --env WIZ_IPS="1.2.3.4 5.6.7.8" \
+    --env HOMEKIT_NAME="My Fancy" \
+    --env HOMEKIT_PIN="87654312" \
+    --env IPS="1.2.3.4 5.6.7.8" \
     --name wizhard \
     --read-only \
     --cap-drop ALL \
     --net host \
     --volume /data \
     --rm \
-    dubodubonduponey/HomeKit-wiz:v1
+    dubodubonduponey/homekit-wiz
 ```
--->
 
 ### It works!
 
@@ -54,7 +46,7 @@ Cool.
 * now "I don't have a code or cannot scan"
 * hit "My_Fancy"
 * "Add Anyway"
-* type your pin from HomeKit_PIN above
+* type your pin from HOMEKIT_PIN above
 * "Next", "Done"
 
 ### WHY... DOES... NOT... WORK
@@ -66,17 +58,29 @@ As far as I know, there is no (mdns) discovery mechanism to figure out the ips, 
 Typically, once the bulbs are on your network, they should get a DHCP lease from your router,
 so, inspect your router client table to figure it out, or nmap your way out like the grown-ups do (hint: Wiz live on port 38899).
 
-<!--
-## Roll your own, for the strong and spirited!
+## Roll your own
 
-You need golang1.13+ to build (probably older versions work as well but can't be bothered to check).
+You need golang (tested with 1.13) and make.
 
 ```
 make build
-./wizhard --help
-./wizhard register --name "Fancy fancy" --pin 87654312 --ips 1.2.3.4 --ips 5.6.7.8
+./dist/wizhard --help
+./dist/wizhard register --name "Fancy fancy" --pin 87654312 --ips 1.2.3.4 --ips 5.6.7.8
 ```
--->
+
+## Persistence
+
+Granted you do not destroyed the data volume (or otherwise store /data in a persistent location),
+you can just bounce the container adding/removing ips for additional bulbs and you should
+not need to reconfigure HomeKit.
+
+Destroying the /data volume will effectively, permanently destroy the HomeKit bridge and starting
+the container again will create an entirely new one that you will have to add to your home.
+
+## Where is the Dockerfile?
+
+https://github.com/dubo-dubon-duponey/docker-homekit-wiz
+
 ## Caveats
 
  * No discovery mechanism, you have to configure the bulbs ip manually after setting them up.
