@@ -8,7 +8,7 @@ import (
 )
 
 const maxBufferSize = 1024
-const timeout = time.Duration(10000000)
+const timeout = time.Duration(10)
 
 // Uber dirty synchronous UDP client - FIXME
 func UDPClient( /*ctx context.Context,*/ address string, reader io.Reader) (string, error) {
