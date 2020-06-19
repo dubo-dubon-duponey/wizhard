@@ -14,7 +14,7 @@ import (
 // It is being returned by a call to getPilot and should be passed as parameters to setPilot
 type State struct {
 	// XXX unclear what this is
-	// Cnx string `json:"cnx,omitempty"`
+	Cnx string `json:"cnx,omitempty"`
 
 	// Bulb mac address?
 	Mac string `json:"mac,omitempty"`
@@ -207,7 +207,7 @@ func (a *WizController) Read() (err error) {
 	data := ResponseStatus{
 		State: State{
 			On: false,
-			R:  0,
+			R:  1,
 			G:  0,
 			B:  0,
 		},
@@ -228,10 +228,11 @@ func (a *WizController) Read() (err error) {
 func (a *WizController) Write() (err error) {
 	// XXX deactivate the programmed scenes and shit so we do not fail dramatically
 	a.State.SceneId = 0
-	// a.State.Speed = 0
+	a.State.Speed = 0
 	a.State.C = 0
 	a.State.W = 0
 	a.State.Src = "udp"
+	a.State.Cnx = "0501"
 
 	message := QueryMessage{
 		Method: "setPilot",
@@ -378,7 +379,7 @@ func (a *WizController) SetHue(value float64) {
 	fmt.Println("Starting point", a.State.R, a.State.G, a.State.B)
 	fmt.Println("WizController Set Hue", value, "with s being", s, "and v", v)
 
-	hsv := colorful.Hsv(value, s, v)
+	hsv := colorful.Hsv(value, s, 255)
 	fmt.Println("Hue Set Red", hsv.R)
 	fmt.Println("Hue Set Green", hsv.G)
 	fmt.Println("Hue Set Blue", hsv.B)
@@ -418,7 +419,7 @@ func (a *WizController) SetSaturation(value float64) {
 	fmt.Println("Starting point", a.State.R, a.State.G, a.State.B)
 	fmt.Println("WizController Set Saturation", value, "with h being", h, "and v", v)
 
-	hsv := colorful.Hsv(h, value/100, v)
+	hsv := colorful.Hsv(h, value/100, 255)
 	fmt.Println("Hue Set Red", hsv.R)
 	fmt.Println("Hue Set Green", hsv.G)
 	fmt.Println("Hue Set Blue", hsv.B)
