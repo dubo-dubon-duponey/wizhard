@@ -27,7 +27,7 @@ type State struct {
 	// Temp - sets color temperature in kelvins - XXX not implemented for now
 	Temp uint `json:"temp,omitempty"`
 	// schdPsetId - rhythm id of the room - XXX not implemented for now
-	SchdPsetId string `json:"schdPsetId,omitempty"`
+	SchdPsetId uint `json:"schdPsetId,omitempty"`
 	/*
 	   sceneId - calls one of the predefined scenes - XXX not implemented for now
 
