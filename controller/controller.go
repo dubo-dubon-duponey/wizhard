@@ -68,7 +68,7 @@ type State struct {
 	       scene 31 - Pulse
 	       scene 32 - Steampunk
 	*/
-	SceneId uint `json:"sceneId"`
+	SceneId uint `json:"sceneId",omitempty`
 	/*
 	   State - on or off
 	*/
@@ -227,7 +227,7 @@ func (a *WizController) Read() (err error) {
 // Set the wiz bulb to desired state
 func (a *WizController) Write() (err error) {
 	// XXX deactivate the programmed scenes and shit so we do not fail dramatically
-	a.State.SceneId = 0
+	// a.State.SceneId = 0
 	a.State.Speed = 0
 	a.State.C = 0
 	a.State.W = 0
