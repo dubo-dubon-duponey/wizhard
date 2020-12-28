@@ -68,7 +68,9 @@ type State struct {
 	       scene 31 - Pulse
 	       scene 32 - Steampunk
 	*/
-	SceneId uint `json:"sceneId",omitempty`
+	// XXX sceneID are problematic - if we repeat them back to the bulb while setting colors, it won't work
+	// Right now, removing the scenes entirely
+	// SceneId uint `json:"sceneId",omitempty`
 	/*
 	   State - on or off
 	*/
